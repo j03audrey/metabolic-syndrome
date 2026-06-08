@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>代謝症候群 — 沈宛徵營養師</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" />
+  <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.min.js"></script>
+  <style>
+    :root {
+      --accent:  #e8643a;
+      --accent2: #4fc3f7;
+      --success: #81c784;
+      --warn:    #ffb74d;
+    }
+    .reveal { font-family: 'Segoe UI', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; }
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: 'Segoe UI', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+      font-weight: 700; letter-spacing: -0.02em;
+    }
+    .reveal h1 { font-size: 2.2em; }
+    .reveal h2 { font-size: 1.5em; color: var(--accent2); }
+    .reveal .progress { color: var(--accent); }
+    .reveal .fragment { opacity: 0.2; }
+    .reveal .fragment.visible { opacity: 1; }
+
+    /* 封面 */
+    .title-slide { text-align: center; }
+    .title-slide .tag {
+      display: inline-block; background: var(--accent); color: #fff;
+      padding: 4px 16px; border-radius: 20px; font-size: 0.52em;
+      letter-spacing: 0.08em; margin-bottom: 0.8em; font-weight: 600;
+    }
+    .title-slide .subtitle { font-size: 0.72em; color: #aaa; margin-top: 0.5em; }
+    .title-slide .author   { margin-top: 2em; font-size: 0.5em; color: #888; }
+
+    /* 統計數字卡 */
+    .stat-row { display: flex; gap: 20px; justify-content: center; margin-top: 1em; }
+    .stat-card {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px; padding: 20px 26px; text-align: center; flex: 1;
+    }
+    .stat-card .num   { font-size: 1.8em; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-card .label { font-size: 0.4em; color: #ccc; margin-top: 6px; }
+
+    /* 優勢卡 */
+    .adv-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 0.6em; }
+    .adv-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 0.6em; }
+    .adv-card {
+      background: rgba(255,255,255,0.05); border-top: 4px solid var(--accent2);
+      border-radius: 8px; padding: 14px 10px; text-align: center;
+    }
+    .adv-card .adv-icon img {
+      width: 52px; height: 52px; object-fit: contain; display: block; margin: 0 auto 8px;
+      filter: drop-shadow(0 0 10px rgba(79,195,247,0.6));
+    }
+    .adv-card .adv-title { font-size: 0.48em; font-weight: 700; color: var(--accent2); margin-bottom: 5px; }
+    .adv-card .adv-desc  { font-size: 0.38em; color: #bbb; line-height: 1.5; }
+
+    /* S-ABCDE 卡（橘紅）*/
+    .sabcde-card { border-top-color: var(--accent); }
+    .sabcde-card .adv-icon img { filter: drop-shadow(0 0 10px rgba(232,100,58,0.6)); }
+    .sabcde-card .adv-title { color: var(--accent); }
+
+    /* 引用框 */
+    .quote-box {
+      background: rgba(255,255,255,0.05); border-left: 4px solid var(--accent);
+      border-radius: 8px; padding: 18px 22px; margin: 0.6em 0;
+      font-size: 0.52em; color: #ddd; font-style: italic; line-height: 1.7;
+    }
+
+    /* 表格 */
+    .reveal table { font-size: 0.44em; width: 100%; border-collapse: collapse; margin-top: 0.6em; }
+    .reveal table th {
+      background: rgba(79,195,247,0.18); color: var(--accent2);
+      padding: 10px 14px; font-weight: 700; border-bottom: 2px solid rgba(79,195,247,0.35);
+    }
+    .reveal table td { padding: 9px 14px; border-bottom: 1px solid rgba(255,255,255,0.07); color: #ccc; }
+    .reveal table tr:last-child td { border-bottom: none; }
+    .warn-val { color: var(--warn); font-weight: 700; }
+    .danger-val { color: var(--accent); font-weight: 700; }
+
+    /* 內容列 */
+    .info-row { display: flex; gap: 16px; margin-top: 0.6em; }
+    .info-box {
+      background: rgba(255,255,255,0.05); border-radius: 10px;
+      padding: 16px 18px; flex: 1; font-size: 0.44em;
+    }
+    .info-box .ib-title { font-size: 1.15em; font-weight: 700; color: var(--accent2); margin-bottom: 8px; }
+    .info-box ul { list-style: none; padding: 0; margin: 0; color: #ccc; line-height: 1.9; }
+    .info-box ul li::before { content: "▸ "; color: var(--accent2); }
+
+    /* 結論卡 */
+    .conclusion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 0.6em; }
+    .conclusion-card { border-radius: 10px; padding: 16px; font-size: 0.42em; }
+    .conclusion-card.positive { background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.3); }
+    .conclusion-card.caution  { background: rgba(255,183,77,0.08); border: 1px solid rgba(255,183,77,0.25); }
+    .conclusion-card .cc-title { font-size: 1.2em; font-weight: 700; margin-bottom: 8px; }
+    .conclusion-card.positive .cc-title { color: var(--accent2); }
+    .conclusion-card.caution  .cc-title { color: var(--warn); }
+    .conclusion-card ul { list-style: none; padding: 0; margin: 0; color: #ccc; line-height: 1.8; }
+    .conclusion-card ul li::before { content: "→ "; opacity: 0.6; }
+
+    /* 封底 */
+    .end-slide { text-align: center; }
+    .end-slide h1 { color: var(--accent2); }
+    .end-slide .tagline { font-size: 0.6em; color: #aaa; margin-top: 0.5em; }
+
+    /* 章節轉換頁 */
+    .chapter-slide { text-align: center; }
+    .chapter-slide .chapter-num {
+      font-size: 0.55em; color: var(--accent); letter-spacing: 0.2em;
+      font-weight: 700; margin-bottom: 0.3em; text-transform: uppercase;
+    }
+    .chapter-slide h1 { font-size: 2em; color: #fff; }
+    .chapter-slide p { font-size: 0.55em; color: #aaa; margin-top: 0.5em; }
+
+    /* VIZ 滑桿 */
+    #viz-slider {
+      width: 80%; margin: 14px auto 0; display: block;
+      -webkit-appearance: none; height: 6px; border-radius: 3px;
+      background: linear-gradient(to right, var(--accent2), var(--accent));
+      outline: none; cursor: pointer;
+    }
+    #viz-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 20px; height: 20px;
+      border-radius: 50%; background: #fff; box-shadow: 0 0 8px rgba(255,255,255,0.5);
+    }
+
+    /* LIVE 動畫 */
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
+
+    /* 講師卡 */
+    .speaker-card {
+      background: rgba(255,255,255,0.05); border-radius: 12px;
+      padding: 20px 28px; margin-top: 0.8em; font-size: 0.44em; color: #ccc;
+    }
+    .speaker-card .sp-name { font-size: 1.5em; font-weight: 800; color: #fff; margin-bottom: 10px; }
+    .speaker-card .sp-row  { display: flex; gap: 32px; }
+    .speaker-card .sp-col  { flex: 1; }
+    .speaker-card .sp-label { color: var(--accent2); font-weight: 700; font-size: 1.05em; margin-bottom: 5px; }
+
+    /* 大綱卡 */
+    .outline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 0.8em; }
+    .outline-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 16px 18px; font-size: 0.42em;
+    }
+    .outline-card .oc-num { font-size: 2em; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+    .outline-card .oc-title { font-size: 1.1em; font-weight: 700; color: #fff; margin-bottom: 5px; }
+    .outline-card .oc-desc { color: #999; line-height: 1.6; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ① 封面 -->
+    <section data-background-image="images/cover.png"
+             data-background-opacity="0.35"
+             data-background-size="cover">
+      <div class="title-slide">
+        <div class="tag">營養健康講座 · 2024</div>
+        <h1>代謝症候群</h1>
+        <h2 style="color:var(--accent); margin-top:0.2em;">遠離現代文明病</h2>
+        <p class="subtitle">了解代謝症候群，守護你的健康黃燈</p>
+        <p class="author">沈宛徵 營養師 ｜ 台北秀傳醫院 ｜ 2024.04.01</p>
+      </div>
+    </section>
+
+    <!-- ② 互動文字雲：開場破冰 -->
+    <section id="slide-wordcloud">
+      <h2 style="font-size:1.1em; margin-bottom:0.4em;">你最在意哪個健康數值？</h2>
+      <div style="display:grid; grid-template-columns:250px 1fr; gap:14px; height:460px;">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="background:rgba(255,255,255,0.06); border-radius:10px; padding:14px;">
+            <div style="font-size:0.38em; color:var(--accent2); font-weight:700; margin-bottom:8px;">輸入你的答案</div>
+            <input id="wc-input" type="text" placeholder="血壓、血糖、體重…" maxlength="12"
+              style="width:100%; padding:8px 12px; border-radius:8px; border:1px solid rgba(79,195,247,0.3);
+                     background:rgba(255,255,255,0.08); color:#fff; font-size:13px;
+                     box-sizing:border-box; font-family:inherit; outline:none;" />
+            <button id="wc-btn"
+              style="width:100%; margin-top:8px; padding:9px; background:var(--accent2); color:#0d1117;
+                     border:none; border-radius:8px; font-weight:700; font-size:13px; cursor:pointer;">
+              送出 ↵
+            </button>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border-radius:10px; padding:14px; flex:1; overflow:hidden; display:flex; flex-direction:column;">
+            <div style="font-size:0.38em; color:var(--accent2); font-weight:700; margin-bottom:8px;">
+              熱門答案
+              <span style="display:inline-block; background:#ff4757; color:#fff; padding:2px 7px;
+                           border-radius:10px; font-size:0.85em; animation:pulse 1.5s infinite;">LIVE</span>
+            </div>
+            <div id="wc-list" style="font-size:0.34em; overflow-y:auto; flex:1; color:#ccc;"></div>
+            <div style="margin-top:8px; font-size:0.32em; color:#666; border-top:1px solid rgba(255,255,255,0.08); padding-top:6px;">
+              總提交：<span id="wc-total" style="color:var(--accent); font-weight:700;">0</span>
+              不同答案：<span id="wc-unique" style="color:var(--accent2); font-weight:700;">0</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border-radius:12px; overflow:hidden;
+                    position:relative; border:1px solid rgba(255,255,255,0.07);">
+          <canvas id="wc-canvas" style="width:100%; height:100%; display:block;"></canvas>
+          <div id="wc-empty" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+                                     color:#444; font-size:0.42em; text-align:center;
+                                     pointer-events:none; line-height:2;">
+            輸入第一個答案<br>文字雲就會出現 ✨
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ③ 講師介紹 -->
+    <section>
+      <h2>關於講師</h2>
+      <div class="speaker-card">
+        <div class="sp-name">沈宛徵 營養師</div>
+        <div class="sp-row">
+          <div class="sp-col">
+            <div class="sp-label">學歷</div>
+            台北醫學大學 保健營養學系
+          </div>
+          <div class="sp-col">
+            <div class="sp-label">現職</div>
+            台北秀傳醫院 營養師
+          </div>
+          <div class="sp-col">
+            <div class="sp-label">專長</div>
+            醫學減重 ／ 代謝營養<br>長照 ／ 三高防治
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ④ 今日大綱 -->
+    <section>
+      <h2>今日大綱</h2>
+      <div class="outline-grid">
+        <div class="outline-card fragment">
+          <div class="oc-num">01</div>
+          <div class="oc-title">代謝症候群是什麼？</div>
+          <div class="oc-desc">定義、5大警戒指標、台灣盛行率與衍生疾病</div>
+        </div>
+        <div class="outline-card fragment">
+          <div class="oc-num">02</div>
+          <div class="oc-title">三高的診斷</div>
+          <div class="oc-desc">血糖、血壓、血脂的診斷標準與併發症</div>
+        </div>
+        <div class="outline-card fragment">
+          <div class="oc-num">03</div>
+          <div class="oc-title">預防生活型態調整</div>
+          <div class="oc-desc">飲食建議、DASH飲食、限鹽節酒、規律運動</div>
+        </div>
+        <div class="outline-card fragment">
+          <div class="oc-num">04</div>
+          <div class="oc-title">三高的控制與藥物</div>
+          <div class="oc-desc">控制目標、藥物選擇原則、自我監測</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑤ 什麼是代謝症候群 -->
+    <section>
+      <h2>什麼是代謝症候群？</h2>
+      <div class="quote-box">
+        「代謝症候群（Metabolic Syndrome）」是指一群危險因子<strong style="color:var(--accent);">同時出現</strong>的現象，它不是一種特定的疾病，而是一個<strong style="color:var(--warn);">病前狀態</strong>及健康危險訊號，是指血壓、血脂、血糖、腰圍異常的統稱，並可以預警健康狀況。
+      </div>
+      <div class="info-row fragment">
+        <div class="info-box" style="border-top: 3px solid var(--warn);">
+          <div class="ib-title" style="color:var(--warn);">⚠ 身體健康亮起黃燈！</div>
+          <ul>
+            <li>不是「疾病」，是病前警訊</li>
+            <li>多個危險因子同時存在</li>
+            <li>可以預測未來罹病風險</li>
+          </ul>
+        </div>
+        <div class="info-box" style="border-top: 3px solid var(--accent);">
+          <div class="ib-title" style="color:var(--accent);">未來罹病機率上升</div>
+          <ul>
+            <li>心臟病風險 ↑↑</li>
+            <li>腦血管疾病風險 ↑↑</li>
+            <li>第 2 型糖尿病風險 ↑↑</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑥ 5大警戒指標 [ICON] -->
+    <section>
+      <h2>5 大警戒指標</h2>
+      <div class="adv-grid-5">
+        <div class="adv-card fragment">
+          <div class="adv-icon"><img src="images/icon_waist.png" alt="腰圍"></div>
+          <div class="adv-title">腰圍過大</div>
+          <div class="adv-desc">男 &gt; 90 cm<br>女 &gt; 80 cm</div>
+        </div>
+        <div class="adv-card fragment">
+          <div class="adv-icon"><img src="images/icon_bp.png" alt="血壓"></div>
+          <div class="adv-title">血壓偏高</div>
+          <div class="adv-desc">收縮壓 ≥ 130<br>舒張壓 ≥ 85 mmHg</div>
+        </div>
+        <div class="adv-card fragment">
+          <div class="adv-icon"><img src="images/icon_glucose.png" alt="血糖"></div>
+          <div class="adv-title">空腹血糖高</div>
+          <div class="adv-desc">≥ 100 mg/dL</div>
+        </div>
+        <div class="adv-card fragment">
+          <div class="adv-icon"><img src="images/icon_tg.png" alt="三酸甘油脂"></div>
+          <div class="adv-title">三酸甘油脂高</div>
+          <div class="adv-desc">≥ 150 mg/dL</div>
+        </div>
+        <div class="adv-card fragment">
+          <div class="adv-icon"><img src="images/icon_hdl.png" alt="HDL"></div>
+          <div class="adv-title">HDL 偏低</div>
+          <div class="adv-desc">男 &lt; 40<br>女 &lt; 50 mg/dL</div>
+        </div>
+      </div>
+      <p style="font-size:0.38em; color:#888; margin-top:0.8em; text-align:center;">
+        ✦ 符合其中 <strong style="color:var(--accent);">3 項以上</strong>即診斷為代謝症候群
+      </p>
+    </section>
+
+    <!-- ⑦ 台灣盛行率 [BG] -->
+    <section data-background-image="images/stats.png"
+             data-background-opacity="0.22"
+             data-background-size="cover">
+      <h2>不可忽視的數字</h2>
+      <div class="stat-row fragment">
+        <div class="stat-card">
+          <div class="num">34.6<span style="font-size:0.5em">%</span></div>
+          <div class="label">台灣 19 歲以上成人<br>代謝症候群盛行率</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">30.2<span style="font-size:0.5em">%</span></div>
+          <div class="label">代謝症候群衍生疾病<br>加總死亡率（超過癌症）</div>
+        </div>
+        <div class="stat-card">
+          <div class="num" style="color:var(--warn);">↑</div>
+          <div class="label">隨年齡增加<br>盛行率持續上升</div>
+        </div>
+      </div>
+      <div class="quote-box fragment" style="margin-top:0.8em; font-size:0.44em;">
+        衍生疾病包括：<strong style="color:var(--accent2);">心臟病、腦血管疾病、糖尿病、高血壓、腎臟病</strong>——死亡率加總已高達 30.2%，超越癌症。
+      </div>
+    </section>
+
+    <!-- ⑧ 代謝症候群成因 -->
+    <section>
+      <h2>代謝症候群的成因</h2>
+      <div class="info-row">
+        <div class="info-box fragment" style="border-top:3px solid var(--accent);">
+          <div class="ib-title">不良生活型態 50%</div>
+          <ul>
+            <li>低纖、高糖、高油脂飲食</li>
+            <li>過量飲酒</li>
+            <li>缺乏運動</li>
+            <li>長期壓力→內分泌失調→血糖上升</li>
+          </ul>
+        </div>
+        <div class="info-box fragment" style="border-top:3px solid var(--accent2);">
+          <div class="ib-title">遺傳因素 20%</div>
+          <ul>
+            <li>家族中有高血壓、糖尿病</li>
+            <li>高脂血症家族史者風險更高</li>
+            <li>胰島素阻抗體質</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-box fragment" style="margin-top:14px; border-top:3px solid var(--warn);">
+        <div class="ib-title" style="color:var(--warn);">核心機轉：胰島素阻抗</div>
+        <div style="font-size:0.9em; color:#ccc;">
+          細胞對胰島素敏感度下降 → 血糖無法順利進入細胞 → 身體代謝出問題 → 血糖、血壓、血脂連鎖異常
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑨ 內臟脂肪 VIZ -->
+    <section>
+      <h2>內臟脂肪 vs 正常體型</h2>
+      <div style="position:relative; height:340px; border-radius:12px; overflow:hidden; margin-top:0.4em;">
+        <!-- Before：正常 -->
+        <div id="viz-before" style="position:absolute;inset:0;background:rgba(79,195,247,0.06);
+              border:1px solid rgba(79,195,247,0.2); border-radius:12px; padding:24px 32px; box-sizing:border-box;">
+          <div style="color:var(--accent2); font-size:0.55em; font-weight:700; margin-bottom:10px;">✦ 正常內臟脂肪</div>
+          <ul style="font-size:0.42em; color:#ccc; list-style:none; padding:0; line-height:2;">
+            <li>▸ 腰圍正常（男 &lt;90cm ／女 &lt;80cm）</li>
+            <li>▸ 內臟脂肪適量，保護內臟功能正常</li>
+            <li>▸ 脂肪細胞激素分泌正常</li>
+            <li>▸ 胰島素敏感度佳</li>
+            <li>▸ 全身系統運作正常</li>
+          </ul>
+        </div>
+        <!-- After：超標 -->
+        <div id="viz-after" style="position:absolute;inset:0;clip-path:inset(0 100% 0 0);
+              background:rgba(232,100,58,0.08); border:1px solid rgba(232,100,58,0.25);
+              border-radius:12px; padding:24px 32px; box-sizing:border-box;">
+          <div style="color:var(--accent); font-size:0.55em; font-weight:700; margin-bottom:10px;">⚠ 內臟脂肪超標（啤酒肚）</div>
+          <ul style="font-size:0.42em; color:#ccc; list-style:none; padding:0; line-height:2;">
+            <li>▸ 腰圍超標（男 ≥90cm ／女 ≥80cm）</li>
+            <li>▸ 過量脂肪堆積→引發全身性發炎</li>
+            <li>▸ 脂肪細胞激素（Adipo-cytokine）異常</li>
+            <li>▸ 胰島素阻抗上升</li>
+            <li>▸ 糖尿病、高血壓、心肌梗塞風險大增</li>
+          </ul>
+        </div>
+        <!-- 分隔線 -->
+        <div id="viz-divider" style="position:absolute;top:0;left:0;width:3px;height:100%;
+              background:linear-gradient(to bottom,transparent,#4fc3f7,transparent);
+              box-shadow:0 0 12px #4fc3f7; pointer-events:none;"></div>
+        <!-- 標籤 -->
+        <div id="viz-label-l" style="position:absolute;top:8px;left:10px;font-size:0.3em;
+              color:var(--accent2);font-weight:700;letter-spacing:0.1em;pointer-events:none;">正常</div>
+        <div id="viz-label-r" style="position:absolute;top:8px;right:10px;font-size:0.3em;
+              color:var(--accent);font-weight:700;letter-spacing:0.1em;pointer-events:none;opacity:0;">超標</div>
+      </div>
+      <input id="viz-slider" type="range" min="0" max="100" value="0" style="margin-top:12px;">
+      <p style="font-size:0.34em; color:#666; text-align:center; margin-top:4px;">← 拖曳滑桿查看對比</p>
+      <script>
+        document.getElementById('viz-slider').addEventListener('input', function() {
+          const v = +this.value;
+          document.getElementById('viz-after').style.clipPath = `inset(0 ${100-v}% 0 0)`;
+          document.getElementById('viz-divider').style.left = v + '%';
+          document.getElementById('viz-label-l').style.opacity = v > 80 ? 0 : 1;
+          document.getElementById('viz-label-r').style.opacity = v > 20 ? 1 : 0;
+        });
+      </script>
+    </section>
+
+    <!-- ⑩ 章節轉換：三高診斷 [BG] -->
+    <section data-background-image="images/chapter_diagnosis.png"
+             data-background-opacity="0.3"
+             data-background-size="cover">
+      <div class="chapter-slide">
+        <div class="chapter-num">PART 02</div>
+        <h1>三高的診斷</h1>
+        <p>血糖、血壓、血脂——你知道自己的數值嗎？</p>
+      </div>
+    </section>
+
+    <!-- ⑪ 血糖與糖尿病 -->
+    <section>
+      <h2>血糖異常與糖尿病診斷</h2>
+      <table>
+        <tr>
+          <th>類別</th>
+          <th>空腹血糖</th>
+          <th>飯後 2 小時血糖</th>
+          <th>HbA1c</th>
+        </tr>
+        <tr>
+          <td>正常</td>
+          <td>70–99 mg/dL</td>
+          <td>&lt; 140 mg/dL</td>
+          <td>&lt; 5.7%</td>
+        </tr>
+        <tr>
+          <td style="color:var(--warn);">糖尿病前期</td>
+          <td class="warn-val">100–125 mg/dL</td>
+          <td class="warn-val">140–199 mg/dL</td>
+          <td class="warn-val">5.7–6.4%</td>
+        </tr>
+        <tr>
+          <td style="color:var(--accent);">糖尿病</td>
+          <td class="danger-val">≥ 126 mg/dL</td>
+          <td class="danger-val">≥ 200 mg/dL</td>
+          <td class="danger-val">≥ 6.5%</td>
+        </tr>
+      </table>
+      <div class="info-row fragment" style="margin-top:14px;">
+        <div class="info-box" style="border-top:3px solid var(--accent);">
+          <div class="ib-title">糖尿病併發症</div>
+          <ul>
+            <li>視網膜病變（失明）</li>
+            <li>糖尿病腎病變（洗腎）</li>
+            <li>周邊神經病變（截肢）</li>
+            <li>心血管疾病風險倍增</li>
+          </ul>
+        </div>
+        <div class="info-box" style="border-top:3px solid var(--warn);">
+          <div class="ib-title" style="color:var(--warn);">糖尿病前期要注意！</div>
+          <ul>
+            <li>血糖超標若未加以注意</li>
+            <li>將來可能進展為糖尿病</li>
+            <li>及早介入飲食與運動</li>
+            <li>可有效逆轉</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑫ 高血壓 -->
+    <section>
+      <h2>高血壓診斷與自我監測</h2>
+      <table>
+        <tr><th>類別</th><th>收縮壓 (mmHg)</th><th>舒張壓 (mmHg)</th></tr>
+        <tr><td>理想</td><td>&lt; 120</td><td>&lt; 80</td></tr>
+        <tr><td style="color:var(--warn);">正常偏高</td><td class="warn-val">120–129</td><td>&lt; 80</td></tr>
+        <tr><td style="color:var(--warn);">高血壓前期</td><td class="warn-val">130–139</td><td class="warn-val">80–89</td></tr>
+        <tr><td style="color:var(--accent);">高血壓第一期</td><td class="danger-val">140–159</td><td class="danger-val">90–99</td></tr>
+        <tr><td style="color:var(--accent);">高血壓第二期</td><td class="danger-val">≥ 160</td><td class="danger-val">≥ 100</td></tr>
+      </table>
+      <div class="info-box fragment" style="margin-top:14px; border-top:3px solid var(--accent2);">
+        <div class="ib-title">居家量測 722 原則</div>
+        <div style="font-size:0.9em; color:#ccc; line-height:1.8;">
+          連續量 <strong style="color:var(--accent2);">7</strong> 天 ／
+          每天量 <strong style="color:var(--accent2);">2</strong> 次（早晚）／
+          每次量 <strong style="color:var(--accent2);">2</strong> 個讀數取平均
+          <span style="color:#888; margin-left:10px;">量測前靜坐 5 分鐘、不說話、背靠椅背</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑬ 高血脂 -->
+    <section>
+      <h2>高血脂診斷標準</h2>
+      <table>
+        <tr><th>項目</th><th>正常值</th><th>警戒值</th><th>異常</th></tr>
+        <tr>
+          <td>總膽固醇</td><td>&lt; 200 mg/dL</td>
+          <td class="warn-val">200–239</td><td class="danger-val">≥ 240</td>
+        </tr>
+        <tr>
+          <td>LDL 壞膽固醇</td><td>&lt; 100 mg/dL</td>
+          <td class="warn-val">100–129</td><td class="danger-val">≥ 130</td>
+        </tr>
+        <tr>
+          <td>HDL 好膽固醇</td>
+          <td style="color:var(--success);">男≥40 ／ 女≥50</td>
+          <td>—</td><td class="danger-val">偏低即危險</td>
+        </tr>
+        <tr>
+          <td>三酸甘油脂</td><td>&lt; 150 mg/dL</td>
+          <td class="warn-val">150–199</td><td class="danger-val">≥ 200</td>
+        </tr>
+      </table>
+      <div class="quote-box fragment" style="margin-top:0.6em; font-size:0.42em;">
+        高血脂長期未控制 → 粥狀動脈硬化 → 冠心病、心肌梗塞、腦中風。LDL 每降 1%，心血管事件風險降約 1%。
+      </div>
+    </section>
+
+    <!-- ⑭ 章節轉換：預防 [BG] -->
+    <section data-background-image="images/chapter_prevention.png"
+             data-background-opacity="0.3"
+             data-background-size="cover">
+      <div class="chapter-slide">
+        <div class="chapter-num">PART 03</div>
+        <h1>預防生活型態調整</h1>
+        <p>從飲食、運動、生活習慣著手，守護健康</p>
+      </div>
+    </section>
+
+    <!-- ⑮ 高血壓預防 S-ABCDE [ICON] -->
+    <section>
+      <h2>高血壓預防：S-ABCDE</h2>
+      <div class="adv-grid-5">
+        <div class="adv-card sabcde-card fragment">
+          <div class="adv-icon"><img src="images/icon_salt.png" alt="限鹽"></div>
+          <div class="adv-title">S 限鹽</div>
+          <div class="adv-desc">每日鈉 &lt; 2,400mg<br>（約 1 茶匙鹽）</div>
+        </div>
+        <div class="adv-card sabcde-card fragment">
+          <div class="adv-icon"><img src="images/icon_alcohol.png" alt="節酒"></div>
+          <div class="adv-title">A 節酒</div>
+          <div class="adv-desc">男≤2杯/天<br>女≤1杯/天</div>
+        </div>
+        <div class="adv-card sabcde-card fragment">
+          <div class="adv-icon"><img src="images/icon_weight.png" alt="體重"></div>
+          <div class="adv-title">B 體重控制</div>
+          <div class="adv-desc">BMI 18.5–24<br>腰圍達標</div>
+        </div>
+        <div class="adv-card sabcde-card fragment">
+          <div class="adv-icon"><img src="images/icon_dash.png" alt="DASH飲食"></div>
+          <div class="adv-title">D DASH 飲食</div>
+          <div class="adv-desc">高鉀高鈣<br>低鈉全穀物</div>
+        </div>
+        <div class="adv-card sabcde-card fragment">
+          <div class="adv-icon"><img src="images/icon_exercise.png" alt="運動"></div>
+          <div class="adv-title">E 規律運動</div>
+          <div class="adv-desc">每週 ≥150 分鐘<br>中強度有氧</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑯ DASH 飲食 -->
+    <section>
+      <h2>DASH 飲食 6 大原則</h2>
+      <div class="adv-grid">
+        <div class="adv-card fragment">
+          <div class="adv-title">高鉀飲食</div>
+          <div class="adv-desc">蔬菜、水果、豆類富含鉀<br>有助降低血壓</div>
+        </div>
+        <div class="adv-card fragment">
+          <div class="adv-title">高鈣高鎂</div>
+          <div class="adv-desc">低脂奶類、豆腐、深綠色蔬菜<br>維持血管彈性</div>
+        </div>
+        <div class="adv-card fragment">
+          <div class="adv-title">低鈉攝取</div>
+          <div class="adv-desc">減少加工食品、醃製品<br>外食要求少鹽</div>
+        </div>
+        <div class="adv-card fragment">
+          <div class="adv-title">全穀雜糧</div>
+          <div class="adv-desc">糙米、燕麥、全麥麵包<br>穩定血糖、提供纖維</div>
+        </div>
+        <div class="adv-card fragment">
+          <div class="adv-title">優質蛋白質</div>
+          <div class="adv-desc">白肉魚、豆類、雞胸肉<br>減少紅肉與加工肉品</div>
+        </div>
+        <div class="adv-card fragment">
+          <div class="adv-title">健康油脂</div>
+          <div class="adv-desc">橄欖油、堅果、酪梨<br>减少飽和脂肪與反式脂肪</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑰ 投票 [INTERACT:poll] -->
+    <section id="slide-poll">
+      <h2 style="font-size:1.1em;">你目前最需要注意的健康指標是？</h2>
+      <div id="poll-options" style="display:flex; flex-direction:column; gap:12px; margin-top:0.8em;"></div>
+      <div style="font-size:0.38em; color:#666; text-align:center; margin-top:0.8em;">
+        已投票：<span id="poll-total" style="color:var(--accent); font-weight:700;">0</span> 人
+      </div>
+    </section>
+
+    <!-- ⑱ 三高控制目標 -->
+    <section>
+      <h2>三高控制目標</h2>
+      <div class="conclusion-grid">
+        <div class="conclusion-card positive">
+          <div class="cc-title">血壓控制目標</div>
+          <ul>
+            <li>一般成人：&lt; 130/80 mmHg</li>
+            <li>糖尿病患者：&lt; 130/80 mmHg</li>
+            <li>老年人（≥65歲）：&lt; 140/90 mmHg</li>
+            <li>腎病患者：&lt; 130/80 mmHg</li>
+          </ul>
+        </div>
+        <div class="conclusion-card caution">
+          <div class="cc-title">血糖控制目標</div>
+          <ul>
+            <li>HbA1c &lt; 7.0%（一般糖尿病患）</li>
+            <li>空腹血糖 80–130 mg/dL</li>
+            <li>飯後 2 小時 &lt; 180 mg/dL</li>
+            <li>依個人狀況調整目標</li>
+          </ul>
+        </div>
+        <div class="conclusion-card positive">
+          <div class="cc-title">血脂控制目標</div>
+          <ul>
+            <li>LDL-C &lt; 100 mg/dL（一般）</li>
+            <li>LDL-C &lt; 70 mg/dL（高心血管風險）</li>
+            <li>三酸甘油脂 &lt; 150 mg/dL</li>
+            <li>HDL 男≥40 ／ 女≥50 mg/dL</li>
+          </ul>
+        </div>
+        <div class="conclusion-card caution">
+          <div class="cc-title">藥物治療原則</div>
+          <ul>
+            <li>生活型態改善是首選</li>
+            <li>3–6 個月無效再考慮藥物</li>
+            <li>遵醫囑用藥，不自行停藥</li>
+            <li>定期追蹤，監測副作用</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑲ 封底 [BG] -->
+    <section data-background-image="images/ending.png"
+             data-background-opacity="0.38"
+             data-background-size="cover">
+      <div class="end-slide">
+        <h1 style="color:var(--accent2);">從今天開始，守護健康！</h1>
+        <div class="quote-box" style="margin:1em auto; max-width:600px; text-align:left;">
+          代謝症候群可以預防、可以逆轉。<br>
+          透過飲食調整、規律運動、定期量測，<br>
+          讓身體的「黃燈」重新變回「綠燈」。
+        </div>
+        <p class="tagline">沈宛徵 營養師 ｜ 台北秀傳醫院</p>
+        <p style="font-size:0.4em; color:#666; margin-top:1.5em;">謝謝聆聽 · 歡迎提問</p>
+      </div>
+    </section>
+
+  </div><!-- /slides -->
+</div><!-- /reveal -->
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    transition: 'slide',
+    transitionSpeed: 'default',
+    backgroundTransition: 'fade',
+    center: true,
+    progress: true,
+    controls: true,
+    slideNumber: 'c/t',
+    plugins: []
+  });
+</script>
+
+<!-- Firebase：文字雲 -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
+  import {
+    getFirestore, collection, addDoc, onSnapshot,
+    serverTimestamp, query, orderBy
+  } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAYQhNavPSce17XtvDC5xnXyl9iUhW9KjA",
+    authDomain: "teacherstudy-109ef.firebaseapp.com",
+    projectId: "teacherstudy-109ef",
+    storageBucket: "teacherstudy-109ef.firebasestorage.app",
+    messagingSenderId: "196599230156",
+    appId: "1:196599230156:web:cfe55d364df3ae1b9d5c69"
+  };
+  const app = initializeApp(firebaseConfig, 'wc-app');
+  const fdb = getFirestore(app);
+  const wordsRef = collection(fdb, 'metabolic_syndrome_wordcloud');
+
+  const COLORS = ['#4fc3f7','#e8643a','#ffb74d','#81c784','#ce93d8','#80deea','#f48fb1'];
+  let wcData = [];
+
+  window.wcSubmit = async function() {
+    const input = document.getElementById('wc-input');
+    const word = input.value.trim();
+    if (!word) return;
+    const btn = document.getElementById('wc-btn');
+    btn.disabled = true;
+    try {
+      await addDoc(wordsRef, { word, created_at: serverTimestamp() });
+      input.value = '';
+    } catch(e) { console.error(e); }
+    finally { btn.disabled = false; }
+  };
+
+  document.getElementById('wc-input')?.addEventListener('keypress', e => {
+    if (e.key === 'Enter') window.wcSubmit();
+  });
+  document.getElementById('wc-btn')?.addEventListener('click', window.wcSubmit);
+
+  onSnapshot(query(wordsRef, orderBy('created_at', 'asc')), snap => {
+    const words = [];
+    snap.forEach(doc => words.push(doc.data().word));
+    const counts = {};
+    words.forEach(w => counts[w] = (counts[w] || 0) + 1);
+    wcData = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+
+    document.getElementById('wc-total').textContent = words.length;
+    document.getElementById('wc-unique').textContent = wcData.length;
+
+    const listEl = document.getElementById('wc-list');
+    listEl.innerHTML = wcData.slice(0, 12).map(([w, c]) =>
+      `<div style="display:flex;justify-content:space-between;padding:4px 0;
+                   border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span>${w}</span><span style="color:var(--accent);font-weight:700;">${c}</span>
+      </div>`
+    ).join('') || '<div style="color:#555;padding:8px 0;">尚無資料</div>';
+
+    const empty = document.getElementById('wc-empty');
+    if (empty) empty.style.display = wcData.length > 0 ? 'none' : '';
+    drawWordCloud();
+  });
+
+  function drawWordCloud() {
+    const canvas = document.getElementById('wc-canvas');
+    if (!canvas || typeof WordCloud === 'undefined') return;
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width < 10 || rect.height < 10) return;
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+    if (wcData.length === 0) return;
+    const maxCount = wcData[0][1];
+    WordCloud(canvas, {
+      list: wcData.map(([w, c]) => [w, Math.max(18, Math.round((c / maxCount) * 72))]),
+      gridSize: 6, weightFactor: 1,
+      fontFamily: '"Microsoft JhengHei", "Noto Sans TC", sans-serif',
+      color: () => COLORS[Math.floor(Math.random() * COLORS.length)],
+      backgroundColor: 'transparent',
+      rotateRatio: 0.3, shuffle: true,
+    });
+  }
+
+  Reveal.on('slidechanged', e => {
+    if (e.currentSlide?.id === 'slide-wordcloud') setTimeout(drawWordCloud, 150);
+  });
+</script>
+
+<!-- Firebase：投票 -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
+  import {
+    getFirestore, doc, setDoc, onSnapshot, serverTimestamp
+  } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAYQhNavPSce17XtvDC5xnXyl9iUhW9KjA",
+    authDomain: "teacherstudy-109ef.firebaseapp.com",
+    projectId: "teacherstudy-109ef",
+    storageBucket: "teacherstudy-109ef.firebasestorage.app",
+    messagingSenderId: "196599230156",
+    appId: "1:196599230156:web:cfe55d364df3ae1b9d5c69"
+  };
+  const app2 = initializeApp(firebaseConfig, 'poll-app');
+  const fdb2 = getFirestore(app2);
+
+  const OPTIONS = [
+    { id: 'waist',    label: '腰圍過大（肥胖）' },
+    { id: 'bp',       label: '血壓偏高' },
+    { id: 'glucose',  label: '血糖異常' },
+    { id: 'lipid',    label: '血脂異常（膽固醇 / 三酸甘油脂）' },
+    { id: 'multiple', label: '以上多項都需要注意' },
+  ];
+  const pollRef = doc(fdb2, 'metabolic_syndrome_poll', 'results');
+  const userId = 'u_' + Math.random().toString(36).slice(2, 9);
+  let myVote = null;
+
+  const container = document.getElementById('poll-options');
+  OPTIONS.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.id = `poll-btn-${opt.id}`;
+    btn.innerHTML = `
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="flex:0 0 22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,0.3);
+                     display:flex;align-items:center;justify-content:center;font-size:11px;"
+              id="poll-check-${opt.id}"></span>
+        <span style="flex:1;text-align:left;">${opt.label}</span>
+        <span id="poll-bar-wrap-${opt.id}"
+              style="flex:0 0 110px;height:7px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;">
+          <div id="poll-bar-${opt.id}" style="height:100%;width:0;background:var(--accent2);border-radius:4px;transition:width 0.4s;"></div>
+        </span>
+        <span id="poll-pct-${opt.id}" style="flex:0 0 36px;text-align:right;font-size:0.75em;color:#888;">0%</span>
+      </div>`;
+    btn.style.cssText = `width:100%;padding:11px 16px;background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;
+      font-size:0.46em;cursor:pointer;font-family:inherit;`;
+    btn.onclick = () => vote(opt.id);
+    container.appendChild(btn);
+  });
+
+  async function vote(optId) {
+    myVote = optId;
+    const data = {};
+    data[`votes.${userId}`] = optId;
+    data.updated_at = serverTimestamp();
+    await setDoc(pollRef, data, { merge: true });
+  }
+
+  onSnapshot(pollRef, snap => {
+    const data = snap.data() || {};
+    const votes = data.votes || {};
+    const counts = {};
+    OPTIONS.forEach(o => counts[o.id] = 0);
+    Object.values(votes).forEach(v => { if (counts[v] !== undefined) counts[v]++; });
+    const total = Object.values(counts).reduce((a, b) => a + b, 0);
+    document.getElementById('poll-total').textContent = total;
+    OPTIONS.forEach(opt => {
+      const pct = total > 0 ? Math.round((counts[opt.id] / total) * 100) : 0;
+      document.getElementById(`poll-bar-${opt.id}`).style.width = pct + '%';
+      document.getElementById(`poll-pct-${opt.id}`).textContent = pct + '%';
+      const check = document.getElementById(`poll-check-${opt.id}`);
+      if (myVote === opt.id) {
+        check.textContent = '✓';
+        check.style.background = 'var(--accent2)';
+        check.style.borderColor = 'var(--accent2)';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
